@@ -1,7 +1,19 @@
 @(message: String)
 
 @main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message)
-    
+
+        <script language="javascript">
+            onload = function() {
+                var socket = new WebSocket('ws://localhost:9000/line')
+                socket.onmessage = function(message) {
+                    alert(message.data);
+                }
+                socket.onerror = function(error) {
+                    alert("error");
+                }
+                socket.onopen = function() {
+                    socket.send("test message")
+                }
+            }
+        </script>
 }
