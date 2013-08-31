@@ -3,10 +3,10 @@
 @main("Welcome to Play 2.1") {
 
         <script language="javascript">
-            onload = function() {
-                var socket = new WebSocket('ws://localhost:9000/line')
+            var socket = new WebSocket('ws://localhost:9000/line')
+            $(function() {
                 socket.onmessage = function(message) {
-                    alert(message.data);
+                    $("#content").append(message.data + "<br/>")
                 }
                 socket.onerror = function(error) {
                     alert("error");
@@ -14,6 +14,15 @@
                 socket.onopen = function() {
                     socket.send("test message")
                 }
+            })
+            sendMessage = function() {
+                socket.send($("#inputArea").val())
             }
         </script>
+
+        <textarea id="inputArea" cols="40" rows="10"></textarea>
+        <br/>
+        <input type="button" value="send" onclick="sendMessage()"></input>
+
+        <div id="content"/>
 }
