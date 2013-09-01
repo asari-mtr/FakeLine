@@ -6,7 +6,8 @@
             var socket = new WebSocket('ws://localhost:9000/line')
             $(function() {
                 socket.onmessage = function(message) {
-                    $("#content").append(message.data + "<br/>")
+                    var json = JSON.parse(message.data)
+                    $("#content").append(json.message + "<br/>")
                 }
                 socket.onerror = function(error) {
                     alert("error");
