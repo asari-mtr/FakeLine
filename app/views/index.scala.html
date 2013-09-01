@@ -12,11 +12,13 @@
                     alert("error");
                 }
                 socket.onopen = function() {
-                    socket.send("test message")
+                    <!--socket.send({-->
+                        <!--message: "test message"-->
+                    <!--})-->
                 }
             })
             sendMessage = function() {
-                socket.send($("#inputArea").val())
+                socket.send(JSON.stringify({message : $("#inputArea").val()}))
             }
         </script>
 
